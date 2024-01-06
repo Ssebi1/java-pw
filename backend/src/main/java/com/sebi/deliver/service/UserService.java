@@ -58,4 +58,10 @@ public class UserService {
         userRepository.deleteById(id);
         return user.get();
     }
+
+    public User getUser(Long id) {
+        Optional<User> user = userRepository.findById(id);
+        if (user.isEmpty()) { throw new GenericException(); }
+        return user.get();
+    }
 }

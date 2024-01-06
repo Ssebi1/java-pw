@@ -44,4 +44,21 @@ public class User {
         this.email = email;
         this.password = password;
     }
+
+    public User(
+            @NonNull Long id,
+            @NonNull String name,
+            @NonNull String email,
+            @NonNull String password) {
+        this.name = name;
+        this.email = email;
+        this.password = password;
+    }
+
+    public User(
+            @NonNull String email,
+            @NonNull String password) {
+        this.email = email;
+        this.password = password;
+    }
 }
