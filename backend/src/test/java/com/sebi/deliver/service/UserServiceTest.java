@@ -51,6 +51,44 @@ public class UserServiceTest {
         verify(userRepository).save(user);
     }
 
+    @Test
+    @Description("Test for registering an admin user")
+    void registerAdmin() {
+        // arrange
+        User user = new User("Sebi", "test@yahoo.com", "test");
+        user.setAdmin(true);
+        when(userRepository.findByEmail(user.getEmail())).thenReturn(Optional.empty());
+
+        // act
+        User registeredUser = userService.register(user);
+
+        // assert
+        assertNotNull(registeredUser);
+        assertEquals(user.getName(), registeredUser.getName());
+        assertEquals(user.getEmail(), registeredUser.getEmail());
+        assertEquals(user.isAdmin(), registeredUser.isAdmin());
+    }
+
+    @Test
+    @Description("Test for registering an admin user when there's already an admin")
+    void registerAdmin_adminExists_throwsException() {
+        // arrange
+        User adminUser = new User("admin", "admin@yahoo.com", "admin");
+        adminUser.setAdmin(true);
+        User user = new User("Sebi", "test@yahoo.com", "test");
+        user.setAdmin(true);
+        when(userRepository.findByEmail(user.getEmail())).thenReturn(Optional.empty());
+        when(userRepository.findAdmin()).thenReturn(Optional.of(adminUser));
+
+        // act
+        GenericException exception = assertThrows(GenericException.class,
+                () -> userService.register(user));
+
+        // assert
+        assertNotNull(exception);
+        assertEquals("Could not process request. Please try again later", exception.getMessage());
+    }
+
     @Description("Test for registering a user with missing fields")
     @ParameterizedTest
     @ValueSource(strings = {"name", "email", "password"})
@@ -188,5 +226,24 @@ public class UserServiceTest {
         // assert
         assertNotNull(exception);
         assertEquals("Could not process request. Please try again later", exception.getMessage());
+    }
+
+    @Test
+    @Description("Test for updating a user")
+    void updateUser_isSuccess() {
+        // arrange
+        String name = "Sebi", email = "test@yahoo.com", password = "test";
+        User user = new User(1L, name, email, password);
+        when(userRepository.findById(user.getId())).thenReturn(Optional.of(user));
+
+        // act
+        User updateUser = userService.updateUser(user.getId(), user);
+
+        // assert
+        assertNotNull(updateUser);
+        assertEquals(user.getName(), updateUser.getName());
+        assertEquals(user.getEmail(), updateUser.getEmail());
+        assertEquals(user.getAddress(), updateUser.getAddress());
+
     }
 }

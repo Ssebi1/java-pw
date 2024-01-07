@@ -32,6 +32,12 @@ public class UserService {
             throw new EmailAlreadyExistsException();
         }
 
+        if (user.isAdmin()) {
+            // check if there is already an admin
+            Optional<User> admin = userRepository.findAdmin();
+            if (admin.isPresent()) { throw new GenericException(); }
+        }
+
         // hash password
         String newPassword = Hash.hash(user.getPassword());
         user.setPassword(newPassword);
@@ -63,5 +69,16 @@ public class UserService {
         Optional<User> user = userRepository.findById(id);
         if (user.isEmpty()) { throw new GenericException(); }
         return user.get();
+    }
+
+    public User updateUser(Long id, User user) {
+        Optional<User> userFromDb = userRepository.findById(id);
+        if (userFromDb.isEmpty()) { throw new GenericException(); }
+        User userToUpdate = userFromDb.get();
+        if (!user.getName().isEmpty()) { userToUpdate.setName(user.getName()); }
+        if (!user.getEmail().isEmpty()) { userToUpdate.setEmail(user.getEmail()); }
+        if (!user.getPassword().isEmpty()) { userToUpdate.setPassword(user.getPassword()); }
+        userRepository.save(userToUpdate);
+        return userToUpdate;
     }
 }

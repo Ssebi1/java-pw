@@ -36,6 +36,8 @@ public class User {
     @Transient
     private String token;
 
+    private boolean isAdmin;
+
     public User(
             @NonNull String name,
             @NonNull String email,

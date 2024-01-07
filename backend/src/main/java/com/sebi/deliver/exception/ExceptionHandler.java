@@ -1,5 +1,6 @@
 package com.sebi.deliver.exception;
 
+import com.sebi.deliver.exception.product.SalePriceBiggerThanPriceException;
 import com.sebi.deliver.exception.user.*;
 import com.sebi.deliver.model.ApiError;
 import org.springframework.http.ResponseEntity;
@@ -12,7 +13,8 @@ public class ExceptionHandler extends ResponseEntityExceptionHandler {
             {MissingFieldsException.class,
                     EmailAlreadyExistsException.class,
                     WrongCredentialsException.class,
-                    GenericException.class})
+                    GenericException.class,
+                    SalePriceBiggerThanPriceException.class})
     public ResponseEntity handle(Exception exception) {
         ApiError apiError = new ApiError(
                 org.springframework.http.HttpStatus.BAD_REQUEST,

@@ -1,3 +1,3 @@
 # JAVA PROJECT
 - Food Delivery Service
-- Entities: User, Restaurant, Food, Order, Cart, CartItem, UserOrders, RestaurantOrders
+- Entities: User, Product, Order, Cart, CartItem
