@@ -1,7 +1,8 @@
 var express = require('express');
+var store = require('store')
 
 var app = express();
-const {createProxyMiddleware} = require('http-proxy-middleware')
+const { createProxyMiddleware } = require('http-proxy-middleware')
 app.use(
   '/api',
   createProxyMiddleware({
@@ -16,14 +17,30 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 app.use(express.static('./public'));
 
+app.get('/dashboard', (req, res) => {
+  // get products from backend
+  fetch('http://localhost:8080/api/products')
+    .then(res => res.json())
+    .then(json => {
+      res.render('dashboard', { title: 'Dashboard', products: json });
+    })
+    .catch(err => {
+      console.log(err);
+    });
+});
+
 app.get('/login', (req, res) => {
-    res.render('login', { title: 'Login' });
+  res.render('login', { title: 'Login' });
 });
 
 app.get('/register', (req, res) => {
-    res.render('register', { title: 'Register' });
+  res.render('register', { title: 'Register' });
+});
+
+app.get('/products/add', (req, res) => {
+  res.render('addProduct', { title: 'Add product' });
 });
 
 app.listen(8282, function () {
-    console.log('Frontend started!');
+  console.log('Frontend started!');
 })

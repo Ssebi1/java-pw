@@ -53,7 +53,7 @@ public class UserService {
         User userFromDb = userByEmail.get();
         String hashedPassword = userFromDb.getPassword();
         if (!Hash.check(user.getPassword(), hashedPassword)) { throw new WrongCredentialsException(); }
-        return user;
+        return userFromDb;
     }
 
     public User deleteUser(Long id) {

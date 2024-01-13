@@ -26,5 +26,6 @@ public class Product {
 
     private Double weight;
 
+    @Column( length = 100000)
     private String imageUrl = "https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940";
 }
