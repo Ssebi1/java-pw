@@ -41,6 +41,19 @@ app.get('/products/add', (req, res) => {
   res.render('addProduct', { title: 'Add product' });
 });
 
+app.get('/products/update/:id', (req, res) => {
+  let product_id = req.params.id;
+  // get product from backend
+  fetch('http://localhost:8080/api/products/' + product_id)
+    .then(res => res.json())
+    .then(json => {
+      res.render('updateProduct', { title: 'Update product', product: json });
+    })
+    .catch(err => {
+      console.log(err);
+    });
+});
+
 app.listen(8282, function () {
   console.log('Frontend started!');
 })

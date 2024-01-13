@@ -28,9 +28,10 @@ public class ProductService {
         return product;
     }
 
-    public Product updateProduct(Product product) {
-        Optional<Product> productFromDb = productRepository.findById(product.getId());
+    public Product updateProduct(Long id, Product product) {
+        Optional<Product> productFromDb = productRepository.findById(id);
         if (productFromDb.isEmpty()) { throw new GenericException(); }
+        product.setId(id);
         productRepository.save(product);
         return product;
     }

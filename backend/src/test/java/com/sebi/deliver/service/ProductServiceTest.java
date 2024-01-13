@@ -110,7 +110,7 @@ public class ProductServiceTest {
         when(productRepository.findById(product.getId())).thenReturn(Optional.of(product));
 
         // Act
-        Product updatedProduct = productService.updateProduct(product);
+        Product updatedProduct = productService.updateProduct(1L, product);
 
         // Assert
         assertEquals(product.getId(), updatedProduct.getId());
@@ -136,7 +136,7 @@ public class ProductServiceTest {
 
         // act
         GenericException exception = assertThrows(GenericException.class,
-                () -> productService.updateProduct(product));
+                () -> productService.updateProduct(1L, product));
 
         // assert
         assertNotNull(exception);
