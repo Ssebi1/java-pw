@@ -77,7 +77,10 @@ public class UserService {
         User userToUpdate = userFromDb.get();
         if (!user.getName().isEmpty()) { userToUpdate.setName(user.getName()); }
         if (!user.getEmail().isEmpty()) { userToUpdate.setEmail(user.getEmail()); }
-        if (!user.getPassword().isEmpty()) { userToUpdate.setPassword(user.getPassword()); }
+        if (!user.getAddress().isEmpty()) { userToUpdate.setAddress(user.getAddress()); }
+        if (!user.getCity().isEmpty()) { userToUpdate.setCity(user.getCity()); }
+        if (!user.getPhone().isEmpty()) { userToUpdate.setPhone(user.getPhone()); }
+        if (!user.getNotes().isEmpty()) { userToUpdate.setNotes(user.getNotes()); }
         userRepository.save(userToUpdate);
         return userToUpdate;
     }

@@ -11,6 +11,7 @@
 </head>
 
 <body>
+    <input type="hidden" id="user-id">
     <div class="min-h-full">
         <nav class="bg-gray-800">
             <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -24,10 +25,10 @@
                                 class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">About us</a>
                             <a href="/contact"
                                 class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Contact</a>
-                            <a href="/contact"
-                                class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Cart</a>
+                            <a href="/cart"
+                                class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium" id="cart-link">Cart</a>
                             <a href="/orders"
-                                class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Orders</a>
+                                class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium" id="orders-link">Orders</a>
                         </div>
                     </div>
                     <div class="hidden md:block">
@@ -41,7 +42,7 @@
 
                             <div class="relative ml-3">
                                 <div>
-                                    <button type="button"
+                                    <button type="button" onclick="openUserProfile()"
                                         class="relative flex max-w-xs items-center rounded-full bg-gray-800 text-sm"
                                         id="user-menu-button" aria-expanded="false" aria-haspopup="true">
                                         <span class="absolute -inset-1.5"></span>
@@ -190,11 +191,11 @@
                                                         <% } %>  
                                                     </section>
                                                     <form>
-                                                        <button
+                                                        <button onclick="addToCart(<%=product.id%>)" type="button"
                                                             class="mt-6 flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">Add
                                                             to cart</button>
 
-                                                        <button onclick="updateProduct(<%=product.id%>)" type="button"
+                                                        <button onclick="updateProduct(<%=product.id%>)"
                                                             class="mt-3 flex w-full items-center justify-center rounded-md border border-transparent bg-green-600 px-8 py-3 text-base font-medium text-white hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 update-product-button">Update</button>
                                                         <button onclick="deleteProduct(<%=product.id%>)"
                                                             class="mt-3 flex w-full items-center justify-center rounded-md border border-transparent bg-red-600 px-8 py-3 text-base font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 delete-product-button">Delete</button>
@@ -226,6 +227,16 @@
         }
 
         const user = JSON.parse(localStorage.getItem("user"));
+        const user_id = user.id;
+        user_id_input = document.getElementById("user-id");
+        user_id_input.value = user_id;
+
+        cart_link = document.getElementById("cart-link");
+        cart_link.href = "/cart/" + user_id;
+
+        orders_link = document.getElementById("orders-link");
+        orders_link.href = "/orders/" + user_id;
+
         if (user.admin == false) {
             const addProductButton = document.getElementById("add-product-button");
             addProductButton.style.display = "none";
@@ -291,6 +302,36 @@
                         }).showToast();
                     }
                 });
+        }
+
+        const openUserProfile = () => {
+            window.location.href = "/profile/" + user.id;
+        }
+
+        const addToCart = (product_id) => {
+            fetch("/api/cart/" + user_id + '/' + product_id, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                }
+            })
+            .then((res) => res.json())
+            .then((data) => {
+                if (data.status != 'BAD_REQUEST') {
+                    window.location.href = "/cart/" + user_id;
+                } else {
+                    Toastify({
+                        text: data.message,
+                        close: true,
+                        gravity: "top",
+                        position: "right",
+                        stopOnFocus: true,
+                        style: {
+                            background: "#f02e31",
+                        }
+                    }).showToast();
+                }
+            });
         }
     </script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>

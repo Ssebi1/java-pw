@@ -54,6 +54,65 @@ app.get('/products/update/:id', (req, res) => {
     });
 });
 
+app.get('/profile/:id', (req, res) => {
+  let user_id = req.params.id;
+  // get user from backend
+  fetch('http://localhost:8080/api/users/' + user_id)
+    .then(res => res.json())
+    .then(json => {
+      res.render('profile', { title: 'Profile', user: json });
+    })
+    .catch(err => {
+      console.log(err);
+    });
+});
+
+app.get('/cart/:id', (req, res) => {
+  let user_id = req.params.id;
+  // get cart items from backend
+  fetch('http://localhost:8080/api/cart/' + user_id)
+    .then(res => res.json())
+    .then(json => {
+      res.render('cart', { title: 'Cart', cart: json });
+    })
+    .catch(err => {
+      console.log(err);
+    });
+});
+
+app.get('/orders/:id', (req, res) => {
+  let user_id = req.params.id;
+  // get user from backend
+  fetch('http://localhost:8080/api/users/' + user_id)
+    .then(res => res.json())
+    .then(json => {
+      if (json.role == 'admin') {
+        // get orders from backend
+        fetch('http://localhost:8080/api/orders')
+          .then(res => res.json())
+          .then(json => {
+            res.render('orders', { title: 'Orders', orders: json });
+          })
+          .catch(err => {
+            console.log(err);
+          });
+      } else {
+        // get orders from backend
+        fetch('http://localhost:8080/api/orders/' + user_id)
+          .then(res => res.json())
+          .then(json => {
+            res.render('orders', { title: 'Orders', orders: json });
+          })
+          .catch(err => {
+            console.log(err);
+          });
+      }
+    })
+    .catch(err => {
+      console.log(err);
+    });
+});
+
 app.listen(8282, function () {
   console.log('Frontend started!');
 })
