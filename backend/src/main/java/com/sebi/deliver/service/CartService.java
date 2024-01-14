@@ -28,8 +28,7 @@ public class CartService {
     }
 
     public List<CartItem> getCart(Long id) {
-        List<CartItem> cart = cartRepository.findByUserId(id);
-        return cart;
+        return cartRepository.findByUserId(id);
     }
 
     public CartItem deleteProductFromCart(Long id, Long productId) {

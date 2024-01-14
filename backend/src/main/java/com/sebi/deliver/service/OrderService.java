@@ -1,6 +1,7 @@
 package com.sebi.deliver.service;
 
 import com.sebi.deliver.exception.GenericException;
+import com.sebi.deliver.exception.MissingFieldsException;
 import com.sebi.deliver.model.CartItem;
 import com.sebi.deliver.model.Order;
 import com.sebi.deliver.model.Product;
@@ -45,7 +46,7 @@ public class OrderService {
             throw new GenericException();
         }
         if (user.get().getCity().isEmpty() || user.get().getAddress().isEmpty() || user.get().getPhone().isEmpty()) {
-            throw new GenericException();
+            throw new MissingFieldsException();
         }
         order.setUser(user.get());
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
