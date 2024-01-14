@@ -1,5 +1,6 @@
 package com.sebi.deliver.model;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
@@ -15,6 +16,7 @@ public class Order {
     @Id
     @SequenceGenerator(name = "order_sequence", sequenceName = "order_sequence", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "order_sequence")
+    @Schema(name = "Order id", description = "Unique identifier", example = "1")
     private Long id;
 
     @NotNull
@@ -27,7 +29,9 @@ public class Order {
     private String products;
 
     @NonNull
+    @Schema(name = "Order price", description = "Order price", example = "10.0")
     private Double price;
 
+    @Schema(name = "Order date", description = "Order date", example = "2021-01-01 10:22:00")
     private String date;
 }
