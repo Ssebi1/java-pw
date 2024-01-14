@@ -71,7 +71,4 @@ In aceasta faza, proiectul acopera urmatoarele aspecte: <br>
 <img src="screenshots/screenshot-6.png" width="600px">
 
 ## Swagger documentation
-<object data="swagger-documentation.pdf" type="application/pdf" width="700px" height="700px">
-    <embed src="swagger-documentation.pdf">
-    </embed>
-</object>
+[documentation](swagger-documentation.pdf)
