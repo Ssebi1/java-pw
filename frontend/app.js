@@ -41,6 +41,10 @@ app.get('/products/add', (req, res) => {
   res.render('addProduct', { title: 'Add product' });
 });
 
+app.get('/contact', (req, res) => {
+  res.render('contact', { title: 'Contact' });
+});
+
 app.get('/products/update/:id', (req, res) => {
   let product_id = req.params.id;
   // get product from backend
@@ -102,6 +106,39 @@ app.get('/orders/:id', (req, res) => {
           .then(res => res.json())
           .then(json => {
             res.render('orders', { title: 'Orders', orders: json });
+          })
+          .catch(err => {
+            console.log(err);
+          });
+      }
+    })
+    .catch(err => {
+      console.log(err);
+    });
+});
+
+app.get('/messages/:id', (req, res) => {
+  let user_id = req.params.id;
+  // get messages from backend
+  fetch('http://localhost:8080/api/users/' + user_id)
+    .then(res => res.json())
+    .then(json => {
+      if (json.role == 'admin') {
+        // get orders from backend
+        fetch('http://localhost:8080/api/messages')
+          .then(res => res.json())
+          .then(json => {
+            res.render('messages', { title: 'Messages', messages: json });
+          })
+          .catch(err => {
+            console.log(err);
+          });
+      } else {
+        // get orders from backend
+        fetch('http://localhost:8080/api/messages/' + user_id)
+          .then(res => res.json())
+          .then(json => {
+            res.render('messages', { title: 'Messages', messages: json });
           })
           .catch(err => {
             console.log(err);

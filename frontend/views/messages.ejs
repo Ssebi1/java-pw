@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cart</title>
+    <title>Messages</title>
     <link rel="stylesheet" href="../output.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -24,10 +24,10 @@
                                 class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Contact</a>
                             <a href="/cart" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium" id = "cart-link"
                                 aria-current="page">Cart</a>
-                            <a href="#"
-                                class="bg-gray-900 text-white rounded-md px-3 py-2 text-sm font-medium">Orders</a>
+                            <a href="/orders"
+                                class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium" id="orders-link">Orders</a>
                             <a href="/messages"
-                                class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium" id="messages-link">Messages</a>
+                                class="bg-gray-900 text-white rounded-md px-3 py-2 text-sm font-medium">Messages</a>
                         </div>
                     </div>
                     <div class="hidden md:block">
@@ -120,7 +120,7 @@
 
         <header class="bg-white shadow">
             <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
-                <h1 class="text-3xl font-bold tracking-tight text-gray-900">Orders</h1>
+                <h1 class="text-3xl font-bold tracking-tight text-gray-900">Messages</h1>
             </div>
         </header>
 
@@ -132,19 +132,19 @@
                     </div>
                 </div>
         <ul role="list" class="divide-y divide-gray-100 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8" style="margin: 0 auto;">
-            <% orders.forEach(order => { %>
+            <% messages.forEach(message => { %>
                 <li class="flex justify-between gap-x-6 py-5">
-                <div class="flex min-w-0 gap-x-4">
-                    <img class="h-12 w-12 flex-none rounded-full bg-gray-50" src="https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" alt="">
-                    <div class="min-w-0 flex-auto">
-                    <p class="text-sm font-semibold leading-6 text-gray-900"><%=order.products%></p>
-                    <span class="mt-1 text-sm font-medium text-gray-500"><%=order.user.city%>, <%=order.user.address%>, <%=order.user.phone%></span>
+                    <div class="flex min-w-0 gap-x-4" style="width: 100%;">
+                        <img class="h-12 w-12 flex-none rounded-full bg-gray-50" src="https://static.vecteezy.com/system/resources/previews/008/442/086/non_2x/illustration-of-human-icon-user-symbol-icon-modern-design-on-blank-background-free-vector.jpg" alt="">
+                        <div class="min-w-0 flex-auto">
+                        <p class="text-sm font-semibold leading-6 text-gray-900"><%=message.name%></p>
+                        <span class="mt-1 text-sm font-medium text-gray-500"><%=message.message%></span>
+                        </div>
                     </div>
-                </div>
-                <div class="hidden shrink-0 sm:flex sm:flex-col sm:items-end">
-                    <p class="text-sm leading-6 text-gray-900"><b><%=order.price%> ron</b>, <%=order.date%></p>
-                    <p class="mt-1 text-xs leading-5 text-gray-500" style="cursor: pointer;"><%=order.user.name%></p>
-                </div>
+                    <div class="hidden shrink-0 sm:flex sm:flex-col sm:items-end">
+                        <p class="text-sm leading-6 text-gray-900"><b><%=message.date%></p>
+                        <p class="mt-1 text-xs leading-5 text-gray-500"><%=message.email%>, <%=message.phone%></p>
+                    </div>
                 </li>
             <% }) %>
         </ul>
@@ -163,12 +163,17 @@
         const user = JSON.parse(localStorage.getItem("user"));
         const user_id = user.id;
         document.getElementById("cart-link").href = "/cart/" + user_id;
-        document.getElementById("messages-link").href = "/messages/" + user_id;
+        document.getElementById("orders-link").href = "/orders/" + user_id;
+
+        if (user.admin == false) {
+            document.getElementById("messages-link").style.display = "none";
+        }
 
         const logout = () => {
             localStorage.removeItem("user");
             window.location.href = "/login";
         }
+
         const openUserProfile = () => {
             window.location.href = "/profile/" + user.id;
         }

@@ -21,14 +21,14 @@
                             <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
                             <a href="#" class="bg-gray-900 text-white rounded-md px-3 py-2 text-sm font-medium"
                                 aria-current="page">Products</a>
-                            <a href="/about"
-                                class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">About us</a>
                             <a href="/contact"
                                 class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Contact</a>
                             <a href="/cart"
                                 class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium" id="cart-link">Cart</a>
                             <a href="/orders"
                                 class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium" id="orders-link">Orders</a>
+                            <a href="/messages"
+                                class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium" id="messages-link">Messages</a>
                         </div>
                     </div>
                     <div class="hidden md:block">
@@ -125,8 +125,14 @@
             </div>
         </header>
         <main>
+            <div class="absolute inset-x-0 top-[-10rem] -z-10 transform-gpu overflow-hidden blur-3xl sm:top-[-20rem]"
+                    aria-hidden="true">
+                    <div class="relative left-1/2 -z-10 aspect-[1155/678] w-[36.125rem] max-w-none -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-[#ff80b5] to-[#9089fc] opacity-30 sm:left-[calc(50%-40rem)] sm:w-[72.1875rem]"
+                        style="clip-path: polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)">
+                    </div>
+                </div>
             <div class="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
-                <div class="bg-white">
+                <div class="">
                     <a href="/products/add" class="bg-blue-500 hover:bg-blue-700 text-white py-2 px-2 rounded-full" style="font-size: 14px;" id="add-product-button">Add product</a>
                     <div class="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
                       <h2 class="sr-only">Products</h2>
@@ -236,6 +242,8 @@
 
         orders_link = document.getElementById("orders-link");
         orders_link.href = "/orders/" + user_id;
+
+        document.getElementById("messages-link").href = "/messages/" + user_id;
 
         if (user.admin == false) {
             const addProductButton = document.getElementById("add-product-button");

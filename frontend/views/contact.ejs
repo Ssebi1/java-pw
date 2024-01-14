@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cart</title>
+    <title>Contact</title>
     <link rel="stylesheet" href="../output.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -20,12 +20,13 @@
                             <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
                             <a href="/dashboard"
                                 class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Products</a>
-                            <a href="/contact"
-                                class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Contact</a>
-                            <a href="/cart" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium" id = "cart-link"
-                                aria-current="page">Cart</a>
                             <a href="#"
-                                class="bg-gray-900 text-white rounded-md px-3 py-2 text-sm font-medium">Orders</a>
+                                class="bg-gray-900 text-white rounded-md px-3 py-2 text-sm font-medium">Contact</a>
+                            <a href="/cart"
+                                class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"
+                                id="cart-link" aria-current="page">Cart</a>
+                            <a href="/orders"
+                                class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium" id="orders-link">Orders</a>
                             <a href="/messages"
                                 class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium" id="messages-link">Messages</a>
                         </div>
@@ -84,7 +85,8 @@
                     <a href="#" class="bg-gray-900 text-white block rounded-md px-3 py-2 text-base font-medium"
                         aria-current="page">Dashboard</a>
                     <a href="#"
-                        class="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium">About us</a>
+                        class="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium">About
+                        us</a>
                     <a href="#"
                         class="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium">Contact</a>
                     <a href="#"
@@ -120,36 +122,84 @@
 
         <header class="bg-white shadow">
             <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
-                <h1 class="text-3xl font-bold tracking-tight text-gray-900">Orders</h1>
+                <h1 class="text-3xl font-bold tracking-tight text-gray-900">Contact</h1>
             </div>
         </header>
 
-    <main>
-        <div class="absolute inset-x-0 top-[-10rem] -z-10 transform-gpu overflow-hidden blur-3xl sm:top-[-20rem]"
+        <main>
+            <div class="mt-5">
+                <div class="absolute inset-x-0 top-[-10rem] -z-10 transform-gpu overflow-hidden blur-3xl sm:top-[-20rem]"
                     aria-hidden="true">
                     <div class="relative left-1/2 -z-10 aspect-[1155/678] w-[36.125rem] max-w-none -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-[#ff80b5] to-[#9089fc] opacity-30 sm:left-[calc(50%-40rem)] sm:w-[72.1875rem]"
                         style="clip-path: polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)">
                     </div>
                 </div>
-        <ul role="list" class="divide-y divide-gray-100 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8" style="margin: 0 auto;">
-            <% orders.forEach(order => { %>
-                <li class="flex justify-between gap-x-6 py-5">
-                <div class="flex min-w-0 gap-x-4">
-                    <img class="h-12 w-12 flex-none rounded-full bg-gray-50" src="https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" alt="">
-                    <div class="min-w-0 flex-auto">
-                    <p class="text-sm font-semibold leading-6 text-gray-900"><%=order.products%></p>
-                    <span class="mt-1 text-sm font-medium text-gray-500"><%=order.user.city%>, <%=order.user.address%>, <%=order.user.phone%></span>
+                <form class="mx-auto mt-16 max-w-xl sm:mt-20">
+                    <div class="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2">
+                        <div class="sm:col-span-2">
+                            <label for="name" class="block text-sm font-semibold leading-6 text-gray-900">Name</label>
+                            <div class="mt-2.5">
+                                <input type="text" name="name" id="name" required
+                                    class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                            </div>
+                        </div>
+                        <div class="sm:col-span-2">
+                            <label for="company"
+                                class="block text-sm font-semibold leading-6 text-gray-900">Company</label>
+                            <div class="mt-2.5">
+                                <input type="text" name="company" id="company" autocomplete="organization"
+                                    class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                            </div>
+                        </div>
+                        <div class="sm:col-span-2">
+                            <label for="email" class="block text-sm font-semibold leading-6 text-gray-900">Email</label>
+                            <div class="mt-2.5">
+                                <input type="email" name="email" id="email" autocomplete="email" required
+                                    class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                            </div>
+                        </div>
+                        <div class="sm:col-span-2">
+                            <label for="phone-number" class="block text-sm font-semibold leading-6 text-gray-900">Phone
+                                number</label>
+                            <div class="relative mt-2.5">
+                                <div class="absolute inset-y-0 left-0 flex items-center">
+                                    <label for="country" class="sr-only">Country</label>
+                                    <select id="country" name="country"
+                                        class="h-full rounded-md border-0 bg-transparent bg-none py-0 pl-4 pr-9 text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm">
+                                        <option>RO</option>
+                                        <option>US</option>
+                                        <option>CA</option>
+                                        <option>EU</option>
+                                    </select>
+                                    <svg class="pointer-events-none absolute right-3 top-0 h-full w-5 text-gray-400"
+                                        viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                        <path fill-rule="evenodd"
+                                            d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
+                                            clip-rule="evenodd" />
+                                    </svg>
+                                </div>
+                                <input type="tel" name="phone" id="phone" required
+                                    class="block w-full rounded-md border-0 px-3.5 py-2 pl-20 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                            </div>
+                        </div>
+                        <div class="sm:col-span-2">
+                            <label for="message"
+                                class="block text-sm font-semibold leading-6 text-gray-900">Message</label>
+                            <div class="mt-2.5">
+                                <textarea name="message" id="message" rows="4" required
+                                    class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"></textarea>
+                            </div>
+                        </div>  
                     </div>
-                </div>
-                <div class="hidden shrink-0 sm:flex sm:flex-col sm:items-end">
-                    <p class="text-sm leading-6 text-gray-900"><b><%=order.price%> ron</b>, <%=order.date%></p>
-                    <p class="mt-1 text-xs leading-5 text-gray-500" style="cursor: pointer;"><%=order.user.name%></p>
-                </div>
-                </li>
-            <% }) %>
-        </ul>
-    </main>
-</div>
+                    <div class="mt-10">
+                        <button type="button" onclick="sendMessage()"
+                            class="block w-full rounded-md bg-indigo-600 px-3.5 py-2.5 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Send</button>
+                    </div>
+                </form>
+            </div>
+
+        </main>
+    </div>
 
 
 
@@ -162,8 +212,14 @@
 
         const user = JSON.parse(localStorage.getItem("user"));
         const user_id = user.id;
+
         document.getElementById("cart-link").href = "/cart/" + user_id;
+        document.getElementById("orders-link").href = "/orders/" + user_id;
         document.getElementById("messages-link").href = "/messages/" + user_id;
+
+        document.getElementById('name').value = user.name;
+        document.getElementById('email').value = user.email;
+        document.getElementById('phone').value = user.phone;
 
         const logout = () => {
             localStorage.removeItem("user");
@@ -172,8 +228,41 @@
         const openUserProfile = () => {
             window.location.href = "/profile/" + user.id;
         }
+
+        const sendMessage = () => {
+            fetch("/api/messages/" + user_id, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    name: document.getElementById('name').value,
+                    email: document.getElementById('email').value,
+                    company: document.getElementById('company').value,
+                    phone: document.getElementById('phone').value,
+                    message: document.getElementById('message').value,
+                }),
+            })
+            .then((res) => res.json())
+            .then((data) => {
+                if (data.status != 'BAD_REQUEST') {
+                    window.location.href = "/messages/" + user_id;
+                } else {
+                    Toastify({
+                        text: data.message,
+                        close: true,
+                        gravity: "top",
+                        position: "right",
+                        stopOnFocus: true,
+                        style: {
+                            background: "#f02e31",
+                        }
+                    }).showToast();
+                }
+            });
+        }
     </script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
-    </body>
-    
-    </html>
+</body>
+
+</html>
