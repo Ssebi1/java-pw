@@ -2,6 +2,7 @@ package com.sebi.deliver.model;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.PositiveOrZero;
 import lombok.*;
 
 @NoArgsConstructor(force = true)
@@ -24,6 +25,7 @@ public class Product {
     private String description;
 
     @NonNull
+    @PositiveOrZero
     @Schema(name = "Product price", description = "Product price", example = "10.0")
     private Double price;
 

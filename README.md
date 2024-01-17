@@ -1,7 +1,7 @@
 # JAVA PROJECT
 
 ## Descriere proiect
-Proiectul este o aplicație pentru gestionarea unui magazin online. Aplicația permite utilizatorilor să se autentifice, să adauge produse în coșul de cumpărături, să plaseze comenzi, să administreze produsele și utilizatorii, să aplice cupoane de reducere, să trimită mesaje către administratori și să vizualizeze catalogul de produse. Tehnologiile folosite includ Java (Spring), MariaDB, Docker, Node.js, Express și Ejs. Aplicația are și o documentație Swagger și este testată cu teste unitare și de integrare.
+Proiectul este o aplicație pentru gestionarea unui restaurant online. Aplicația permite utilizatorilor să se autentifice, să adauge produse în coșul de cumpărături, să plaseze comenzi, să administreze produsele și utilizatorii, să aplice cupoane de reducere, să trimită mesaje către administratori și să vizualizeze catalogul de produse. Tehnologiile folosite includ Java (Spring), MariaDB, Docker, Node.js, Express și Ejs. Aplicația are și o documentație Swagger și este testată cu teste unitare și de integrare.
 
 
 ## Business requirements

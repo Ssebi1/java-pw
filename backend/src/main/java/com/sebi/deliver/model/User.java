@@ -3,6 +3,8 @@ package com.sebi.deliver.model;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.Size;
 import lombok.*;
 
 @NoArgsConstructor(force = true)
@@ -22,11 +24,13 @@ public class User {
     private String name;
 
     @NonNull
+    @Email
     @Schema(name = "User email", description = "User email", example = "test@yahoo.com")
     private String email;
 
     @NonNull
     @Schema(name = "User password", description = "User password", example = "password")
+    @Size(min = 6)
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
 
