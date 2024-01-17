@@ -90,7 +90,7 @@ app.get('/orders/:id', (req, res) => {
   fetch('http://localhost:8080/api/users/' + user_id)
     .then(res => res.json())
     .then(json => {
-      if (json.role == 'admin') {
+      if (json.admin) {
         // get orders from backend
         fetch('http://localhost:8080/api/orders')
           .then(res => res.json())
@@ -123,7 +123,7 @@ app.get('/messages/:id', (req, res) => {
   fetch('http://localhost:8080/api/users/' + user_id)
     .then(res => res.json())
     .then(json => {
-      if (json.role == 'admin') {
+      if (json.admin) {
         // get orders from backend
         fetch('http://localhost:8080/api/messages')
           .then(res => res.json())
